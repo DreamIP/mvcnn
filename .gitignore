@@ -1,0 +1,4 @@
+*.log
+dataset/*
+*.caffemodel
+*/__pycache__/
