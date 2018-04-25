@@ -3,74 +3,30 @@ import numpy as np
 os.environ['GLOG_minloglevel'] = '2'
 import caffe
 
-def EvalCaffeAcc(proto_file, weight_file, num_itter):
+def EvalCaffeAcc(proto_file, weight_file, num_iter):
     net = caffe.Net(proto_file,weight_file,caffe.TEST)
     acc = 0
-    for itter in range(num_itter):
+    for itter in range(num_iter):
         acc+=net.forward()['accuracy']
-    acc = acc / num_itter
-    print(" >> Accuracy of " + weight_file + ": " + str(100*acc))
-
-
-def EvalAlexnetAcc(proto_file='alexnet_eval.prototxt',weight_file='alexnet.caffemodel',num_itter=50, dataset_path=0):
-    net = caffe.Net(proto_file,weight_file,caffe.TEST)
-    acc = 0
-    for itter in range(num_itter):
-        acc+=net.forward()['accuracy']
-    acc = acc / num_itter
-    print(" >> Accuracy of " + weight_file + ": " + str(100*acc))
- 
+    acc = acc / num_iter
+    print(weight_file + ": " + str(100*acc))
 
 def main():
-    num_itter = 500
-    caffe.set_mode_gpu()
-    caffe.set_device(0)
-
-    # alexnet_ft
-    proto_file = 'alexnet_eval.prototxt'
-    weight_files = ['alexnet_ft_100k.caffemodel',
-                    'alexnet_ft_200k.caffemodel',
-                    'alexnet_ft_300k.caffemodel',
-                    'alexnet_ft_400k.caffemodel']
-
-    for weight_file in weight_files:
-        EvalCaffeAcc(proto_file,weight_file,num_itter)
-
-
-
-    # mvcnn12
-    proto_file = 'mvcnn12_eval.prototxt'
-    weight_file = 'alexnet_ft.caffemodel'
-    EvalCaffeAcc(proto_file,weight_file,num_itter)
-
-
-    # mvcnn12_ft
-    proto_file = 'mvcnn12_eval.prototxt'
-    weight_files = ['mvcnn12_ft_100.caffemodel',
-                    'mvcnn12_ft_200.caffemodel',
-                    'mvcnn12_ft_300.caffemodel',
-                    'mvcnn12_ft_400.caffemodel',
-                    'mvcnn12_ft_500.caffemodel',
-                    'mvcnn12_ft_600.caffemodel',
-                    'mvcnn12_ft_700.caffemodel',
-                    'mvcnn12_ft_800.caffemodel',
-                    'mvcnn12_ft_900.caffemodel',
-                    'mvcnn12_ft_1000.caffemodel',
-                    'mvcnn12_ft_1100.caffemodel',
-                    'mvcnn12_ft_1200.caffemodel',
-                    'mvcnn12_ft_1300.caffemodel',
-                    'mvcnn12_ft_1400.caffemodel',
-                    'mvcnn12_ft_1500.caffemodel',
-                    'mvcnn12_ft_1600.caffemodel',
-                    'mvcnn12_ft_1700.caffemodel',
-                    'mvcnn12_ft_1800.caffemodel',
-                    'mvcnn12_ft_1900.caffemodel',
-                    'mvcnn12_ft_2000.caffemodel']
-    for weight_file in weight_files:
-        EvalCaffeAcc(proto_file,weight_file,num_itter)
+    num_iter = 1500
+    ## ENABLE GPU MODE
+    # caffe.set_mode_gpu()
+    # caffe.set_device(0)
+    nb_views = ['2','3','4','10','11','12']                 # number of views
+    caffe_model_root = '/media/kamel/Data/caffemodels/' # Path to caffemodels
+    for nv in nb_views:
+        proto_file = 'mvcnn' + nv + '.prototxt'          # File name of proto
+        for state_itter in range(100,2100,100):      # loop accross snapshots
+            weight_file = caffe_model_root
+            weight_file += 'mvcnn' + nv + '_iter_' + str(state_itter) + '.caffemodel'
+            if(os.path.isfile(weight_file) and os.path.isfile(proto_file)) :
+                EvalCaffeAcc(proto_file,weight_file,num_iter)
 
 if __name__ == '__main__':
-    # EvalAlexnetAcc()
+
     main()
     os.environ['GLOG_minloglevel'] = '0'
-
