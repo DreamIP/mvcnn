@@ -12,7 +12,7 @@ def EvalCaffeAcc(proto_file, weight_file, num_iter):
     print(weight_file + ": " + str(100*acc))
 
 def main():
-    num_iter = 1500
+    num_iter = 2000
     ## ENABLE GPU MODE
     # caffe.set_mode_gpu()
     # caffe.set_device(0)
