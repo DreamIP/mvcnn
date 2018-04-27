@@ -54,7 +54,7 @@ class MVCNNDataLayer(caffe.Layer):
     pass
 
   def _loadSampleImage(self, modelName):
-    mean_file = np.load('ilsvrc_2012_mean.npy')
+    mean_file = np.load('../caffemodel/ilsvrc_2012_mean.npy')
     pixelMeans = mean_file.mean(1).mean(1)
     imh = 227
     imw = 227
