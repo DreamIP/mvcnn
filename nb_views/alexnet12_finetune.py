@@ -3,7 +3,6 @@
 import sys
 import os
 import numpy as np
-os.environ['GLOG_minloglevel'] = '2'
 import caffe
 sys.path.insert(0,'../src')
 caffe.set_mode_gpu()
