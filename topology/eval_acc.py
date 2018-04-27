@@ -16,7 +16,6 @@ def main():
     ## ENABLE GPU MODE
     caffe.set_mode_gpu()
     caffe.set_device(0)
-    proto_file = 'mvnetpa2.prototxt'          # File name of proto
     #nb_views = ['2','3','4','10','11','12']                 # number of views
     nb_views = ['12']                 # number of views
     for nv in nb_views:
