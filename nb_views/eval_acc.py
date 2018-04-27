@@ -22,8 +22,8 @@ def main():
     nb_views = ['2','3','4','10','11','12']                 # number of views
     caffe_model_root = '../caffemodel/' # Path to caffemodels
     for nv in nb_views:
-        proto_file = 'mvcnn' + nv + '.prototxt'          # File name of proto
-        weight_file = 'alexnet' + nv + '.caffemodel'
+        proto_file = 'alexnet' + nv + '.prototxt'          # File name of proto
+        weight_file = caffe_model_root + 'alexnet' + nv + '.caffemodel'
         if(os.path.isfile(weight_file) and os.path.isfile(proto_file)) :
             EvalCaffeAcc(proto_file,weight_file,num_iter)
 

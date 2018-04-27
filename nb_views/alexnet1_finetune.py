@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-
+import sys
+import os
+import numpy as np
+os.environ['GLOG_minloglevel'] = '2'
+import caffe
+sys.path.insert(0,'../src')
+import MVCNNDataLayer
 import numpy as np
 import sys
 caffe_root = './caffe/'

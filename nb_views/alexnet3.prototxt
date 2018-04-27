@@ -1,4 +1,4 @@
-name: "mvcnn12_on_modelnetv1"
+name: "AlexNet3"
 layer {
   name: "inputdata"
   type: "Python"
