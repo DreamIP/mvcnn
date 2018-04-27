@@ -1,7 +1,11 @@
+import sys
 import os
 import numpy as np
 os.environ['GLOG_minloglevel'] = '2'
 import caffe
+
+sys.path.insert(0,'../src')
+import MVCNNDataLayer
 
 def EvalCaffeAcc(proto_file, weight_file, num_iter):
     net = caffe.Net(proto_file,weight_file,caffe.TEST)
@@ -18,13 +22,12 @@ def main():
     caffe.set_device(0)
     nb_views = ['2','3','4','11','12']                 # number of views
     nb_views = '3'
-    for nv in nb_views:
-        proto_file = 'mvcnn' + nv + '.prototxt'          # File name of proto
-        for state_itter in range(100,2100,100):      # loop accross snapshots
-            weight_file = '../caffemodel/mvcnn' + nv + '.caffemodel'
-            print(weight_file)
-            if(os.path.isfile(weight_file) and os.path.isfile(proto_file)) :
-                EvalCaffeAcc(proto_file,weight_file,num_iter)
+    for state_iter  in range(100,2100,100):
+        proto_file = 'alexnet3.prototxt'          # File name of proto
+        weight_file = 'alexnet3' + '_iter_' + str(state_iter) + '.caffemodel'
+        print(weight_file)
+        if(os.path.isfile(weight_file) and os.path.isfile(proto_file)) :
+            EvalCaffeAcc(proto_file,weight_file,num_iter)
 if __name__ == '__main__':
 
     main()
