@@ -1,4 +1,6 @@
 *.log
 dataset/*
+caffemodel/*
+*.solverstate
 *.caffemodel
 */__pycache__/
