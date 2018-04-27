@@ -1,4 +1,4 @@
-net: "mvnetpa2.prototxt"
+net: "mvnetpa4.prototxt"
 test_iter: 100
 test_interval: 100
 base_lr: 0.0001
@@ -9,5 +9,5 @@ momentum: 0.9
 weight_decay: 0.0005
 snapshot: 100
 solver_mode: GPU
-snapshot_prefix: "mvnetpa2"
+snapshot_prefix: "mvnetpa4"
 iter_size : 32

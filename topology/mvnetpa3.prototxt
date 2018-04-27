@@ -7,7 +7,7 @@ layer {
   python_param {
     module: 'MVCNNDataLayer'
     layer: 'MVCNNDataLayer'
-    param_str: "{'phase': 'train', 'batch_size': 1, 'view_size': 2,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
+    param_str: "{'phase': 'train', 'batch_size': 1, 'view_size': 3,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
   }
   include {
     phase: TRAIN
@@ -21,7 +21,7 @@ layer {
   python_param {
     module: 'MVCNNDataLayer'
     layer: 'MVCNNDataLayer'
-    param_str: "{'phase': 'test', 'batch_size': 1, 'view_size': 2,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
+    param_str: "{'phase': 'test', 'batch_size': 1, 'view_size': 3,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
   }
   include {
     phase: TEST
@@ -260,12 +260,14 @@ type : "Slice"
 bottom: "pool5"
 top : "model_view0"
 top : "model_view1"
+top : "model_view2"
 
 
 
 slice_param{
 axis : 0
 slice_point: 1
+slice_point: 2
 }
 }
 
@@ -274,6 +276,7 @@ name: "view_pooling_max"
 type: "Eltwise"
 bottom: "model_view0"
 bottom: "model_view1"
+bottom: "model_view2"
 
 
 top: "view_pooling_max"
