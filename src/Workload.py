@@ -18,12 +18,8 @@ import math
 import matplotlib.pyplot as plt
 import pylab as P
 
-CAFFE_ROOT       = os.environ['CAFFE_ROOT']
-CAFFE_PYTHON_LIB = CAFFE_ROOT+'/python'
-sys.path.insert(0, CAFFE_PYTHON_LIB)
 os.environ['GLOG_minloglevel'] = '2' # Supresses Display on console
 import caffe;
-sys.path.insert(0,"../src")
 
 def listLayers(protoFile, modelFile):
     cnn           = caffe.Net(protoFile,1,weights=modelFile)

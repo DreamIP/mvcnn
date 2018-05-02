@@ -11,6 +11,6 @@ import MVCNNDataLayer
 
 caffe.set_mode_gpu()
 caffe.set_device(0)
-solver = caffe.SGDSolver('alexnet3_s1_solver.prototxt')
-solver.net.copy_from('../caffemodel/alexnet3_s1.caffemodel')
+solver = caffe.SGDSolver('netpa3_s1_solver.prototxt')
+solver.net.copy_from('../caffemodel/netpa3.caffemodel')
 solver.solve()
