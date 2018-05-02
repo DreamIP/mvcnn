@@ -23,8 +23,8 @@ def main():
     nb_views = ['2','3','4','11','12']                 # number of views
     nb_views = '3'
     for state_iter  in range(100,2100,100):
-        proto_file = 'alexnet3.prototxt'          # File name of proto
-        weight_file = 'alexnet3' + '_iter_' + str(state_iter) + '.caffemodel'
+        proto_file = 'alexnet3_s1.prototxt'          # File name of proto
+        weight_file = 'alexnet3_s1' + '_iter_' + str(state_iter) + '.caffemodel'
         print(weight_file)
         if(os.path.isfile(weight_file) and os.path.isfile(proto_file)) :
             EvalCaffeAcc(proto_file,weight_file,num_iter)
