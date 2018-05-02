@@ -12,5 +12,5 @@ import os
 caffe.set_mode_gpu()
 caffe.set_device(0)
 solver = caffe.SGDSolver('resnet_solver.prototxt')
-solver.net.copy_from('resnet.caffemodel')
+solver.net.copy_from('../caffemodel/resnet.caffemodel')
 solver.solve()

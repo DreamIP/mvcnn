@@ -7,7 +7,7 @@ layer {
   python_param {
     module: 'MVCNNDataLayerPreTrain'
     layer: 'MVCNNDataLayerPreTrain'
-    param_str: "{'phase': 'train', 'batch_size': 64, 'view_size': 1,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
+    param_str: "{'phase': 'train', 'batch_size': 32, 'view_size': 1,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
   }
   include {
     phase: TRAIN
@@ -21,11 +21,25 @@ layer {
   python_param {
     module: 'MVCNNDataLayerPreTrain'
     layer: 'MVCNNDataLayerPreTrain'
-    param_str: "{'phase': 'test', 'batch_size': 1, 'view_size': 1,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
+    param_str: "{'phase': 'test', 'batch_size': 32, 'view_size': 1,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
   }
   include {
     phase: TEST
   }
+}
+
+layer {
+	bottom: "data"
+	top: "conv1"
+	name: "conv1"
+	type: "Convolution"
+	convolution_param {
+		num_output: 64
+		kernel_size: 7
+		pad: 3
+		stride: 2
+		bias_term: false
+	}
 }
 
 layer {
@@ -6765,7 +6779,6 @@ layer {
 	}
 }
 
-}
 layer {
   name: "modelNet40"
   type: "InnerProduct"
