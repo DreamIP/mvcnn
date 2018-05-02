@@ -21,7 +21,7 @@ layer {
   python_param {
     module: 'MVCNNDataLayerPreTrain'
     layer: 'MVCNNDataLayerPreTrain'
-    param_str: "{'phase': 'test', 'batch_size': 64, 'view_size': 1,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
+    param_str: "{'phase': 'test', 'batch_size': 1, 'view_size': 1,'channel_size': 3, 'data_path': '../dataset/modelnet40v1'}"
   }
   include {
     phase: TEST
