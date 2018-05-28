@@ -13,7 +13,7 @@ if __name__ == '__main__':
     proto_file = cwd + '/netpa3_s1_head.prototxt'
     model_file = cwd + '/../caffemodel/netpa3_s1.caffemodel'
     top_level_dir  = cwd + '/hdl_generated'
-    bitWidth  = 8
+    bitWidth  = 7
     haddoc2.main(proto_file, model_file, top_level_dir, bitWidth)
 
     quartus_project_dir = 'quartus'
