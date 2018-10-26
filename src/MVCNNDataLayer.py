@@ -58,7 +58,7 @@ class MVCNNDataLayer(caffe.Layer):
     pass
 
   def _loadSampleImage(self, modelName):
-    mean_file = np.load('/home/john/Desktop/projects_py/mvcnn-master/caffe_model/ilsvrc12/ilsvrc_2012_mean.npy')
+    mean_file = np.load('../experiments/topology/ilsvrc_2012_mean.npy')
     pixelMeans = mean_file.mean(1).mean(1)
     imh = IM_HEIGHT
     imw = IM_WIDTH
@@ -84,7 +84,7 @@ class MVCNNDataLayer(caffe.Layer):
   def _get_next_minibatch(self):
     height = IM_HEIGHT
     width = IM_WIDTH
-    batch_size = self._batch_size
+    batch_size = self._batch_size 
     #if self._train_iteration == 0 : shuffle(self._modelList)
     data = np.ones((self._batch_size * self._view_Size, self._channel_Size, height, width), dtype=np.float32)
     label = np.ones((batch_size, 1, 1, 1), dtype=np.float32)
