@@ -12,5 +12,5 @@ import h5py
 caffe.set_mode_cpu()
 #caffe.set_device(0)
 solver = caffe.SGDSolver('mv_vgg16_2_solver.prototxt')
-solver.net.copy_from('/home/john/Desktop/projects_py/mvcnn-master/caffe_model/vgg16.caffemodel')
+solver.net.copy_from('../../caffe_model/vgg16.caffemodel')
 solver.solve()
