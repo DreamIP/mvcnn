@@ -10,6 +10,10 @@ import cv2
 from PIL import Image
 from random import shuffle
 
+IM_WIDTH = 224
+IM_HEIGHT = 224
+COLOR_CHANNEL = 3
+
 class MVCNNDataLayer(caffe.Layer):
   """Caffe moving mnist data layer used for training."""
   def setup(self, bottom, top):
@@ -35,7 +39,7 @@ class MVCNNDataLayer(caffe.Layer):
             self._model2lable[modelName] = i
             if self._modelList.count(modelName) == 0:
                 self._modelList.append(modelName)
-    top[0].reshape(self._batch_size * self._view_Size ,self._channel_Size, 227, 227)
+    top[0].reshape(self._batch_size * self._view_Size ,self._channel_Size, IM_HEIGHT, IM_WIDTH)
     top[1].reshape(self._batch_size, 1, 1, 1)
 
   def forward(self, bottom, top):
@@ -54,11 +58,11 @@ class MVCNNDataLayer(caffe.Layer):
     pass
 
   def _loadSampleImage(self, modelName):
-    mean_file = np.load('../caffemodel/ilsvrc_2012_mean.npy')
+    mean_file = np.load('/home/john/Desktop/projects_py/mvcnn-master/caffe_model/ilsvrc12/ilsvrc_2012_mean.npy')
     pixelMeans = mean_file.mean(1).mean(1)
-    imh = 227
-    imw = 227
-    imc = 3
+    imh = IM_HEIGHT
+    imw = IM_WIDTH
+    imc = COLOR_CHANNEL
     ims = np.zeros((imh, imw, imc, self._view_Size), dtype=np.float32)
     label = self._model2lable[modelName]
     for view in range(1, self._view_Size + 1):
@@ -78,8 +82,8 @@ class MVCNNDataLayer(caffe.Layer):
     pass
 
   def _get_next_minibatch(self):
-    height = 227
-    width = 227
+    height = IM_HEIGHT
+    width = IM_WIDTH
     batch_size = self._batch_size
     #if self._train_iteration == 0 : shuffle(self._modelList)
     data = np.ones((self._batch_size * self._view_Size, self._channel_Size, height, width), dtype=np.float32)
