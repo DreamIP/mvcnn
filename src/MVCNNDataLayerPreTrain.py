@@ -12,7 +12,7 @@ from random import shuffle
 
 IM_WIDTH = 224
 IM_HEIGHT = 224
-COLOR_CHANNEL = 1
+COLOR_CHANNEL = 3
 
 class MVCNNDataLayerPreTrain(caffe.Layer):
   """Caffe moving mnist data layer used for training."""
@@ -59,7 +59,7 @@ class MVCNNDataLayerPreTrain(caffe.Layer):
     pass
 
   def _loadSampleImage(self, modelName):
-    mean_file = np.load('../caffemodel/ilsvrc12/ilsvrc_2012_mean.npy')
+    mean_file = np.load('../../src/ilsvrc_2012_mean.npy')
     pixelMeans = mean_file.mean(1).mean(1)
     imh = IM_HEIGHT
     imw = IM_WIDTH
