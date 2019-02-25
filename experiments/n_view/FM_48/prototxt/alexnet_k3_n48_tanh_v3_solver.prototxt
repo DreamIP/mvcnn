@@ -1,0 +1,13 @@
+net: "netpa_tanh_v3.prototxt"
+test_iter: 10000
+test_interval: 200
+base_lr: 0.0001
+lr_policy: "fixed"
+display: 20
+max_iter: 8000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 200
+solver_mode: GPU
+snapshot_prefix: "netpa_tanh_v3"
+iter_size : 32
